@@ -1,0 +1,34 @@
+body{
+    text-align: center;
+}
+h1+p{
+    background-color: #000000;
+    color:aquamarine;
+   font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+
+}
+h2{
+    font-family: 'Trebuchet MS', georgia, monospace, times;
+}
+h3:hover{
+    color: rgb(0, 42, 255);
+    background-color: rgb(255, 0, 0);
+    font-family: 'SF Mono', 'Segoe UI Mono', 'Roboto Mono', monospace;
+
+}
+p::first-letter{
+    color: rgb(0, 217, 255);
+    font-size: 80px;
+}
+ul>li{
+    font-size: 20px;
+    color: rgb(255, 77, 0);
+}
+ul li:nth-child(1){
+color: rgb(98, 0, 255);
+background-color: rgb(0, 255, 0);
+border-radius:10px;
+margin: 10px;
+font-family: 'Trebuchet MS', georgia, monospace, times;
+}
+

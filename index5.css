@@ -1,0 +1,15 @@
+body{
+    background-image: linear-gradient(to bottom, #00bfff, #8800ff);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.start{
+    animation: twinkle 2s infinite alternate;
+}
+@keyframes twinkle {
+    from { background-color: #ff0000; }
+    to { background-color: #ffc400; }
+}
+.title{
+    color: #ff7300;
+}

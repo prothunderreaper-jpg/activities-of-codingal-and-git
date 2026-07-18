@@ -1,0 +1,16 @@
+h1{
+    position: static;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif, Courier, monospace;
+}
+h2{
+    position: relative;
+    font-family:'Courier New', Courier, monospace
+}
+h3{
+    position: absolute;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+h4{
+    position: sticky;
+    font-family: 'Gill Sans', 'Gill Sans MT', system, 'Trebuchet MS', sans-serif
+}
