@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplication</title>
+
+    <style>
+        *{
+            margin: 10px;
+        }
+    .btn {
+  padding: 15px 25px;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
+  border: solid 1px transparent;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  display: inline-block;
+  margin: 10px;
+    }
+    
+    .btn-outline:hover {
+  background-color: #f6ff00;
+  color: #ffffff;
+    }
+    .btn-gradient {
+  background: linear-gradient( #ff416c 0%, #ff4b2b 100%);
+  color: #ffffff;
+  box-shadow: 0 8px 15px rgba(255, 75, 43, 0.3);
+    }
+    .btn-gradient:hover {
+  background: linear-gradient( #ff4b2b 0%, #ff416c 100%);
+  box-shadow: 0 8px 20px rgba(255, 75, 43, 0.5);
+    }
+    .btn-3d {
+  background-color: #ff00a2;
+  color: #212529;
+  border-bottom: 5px solid #ff2f00;
+  position: relative;
+    }
+    .btn-3d:active {
+  border-bottom: 1px solid #ff0000;
+  transform: translateY(4px);
+    }
+
+
+
+
+    </style>
+
+</head>
+<body>
+
+    <button onclick="multiply(num1, num2)" class="btn btn-3d , btn btn-gradient" >Click Me!</button>
+    <p id="result"></p>
+
+<script>
+
+    var num1 = parseFloat(prompt("Enter the value of a:"));
+    var num2 = parseFloat(prompt("Enter the value of b:"));
+    var mul = num1 * num2;
+
+    function multiply(a,b)
+    {
+        if(b === undefined)
+        {
+        alert ("The value of b is undefined");
+        b=5;
+        }
+        var result = a * b;
+        document.getElementById("result").innerHTML = result;
+    }
+</script>
+
+
+</body>
+</html>

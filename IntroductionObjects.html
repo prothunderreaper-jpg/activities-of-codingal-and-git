@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Introduction to Objects</title>
+    <meta name="description" content="An introduction to objects in JavaScript">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="">
+
+</head>
+<body>
+    <h1>Introduction to Objects</h1>
+    <h1 id="card-title">card details</h1>
+    <div class="card">
+        <div class="card-body">
+            <div class="card-title">
+                <li class="list-group-items">
+                    <span class="card-label">
+                        <strong id="name">---</strong>
+                    </span>
+                </li>
+            </div>
+        </div>
+    </div>
+    
+
+    <script>
+        var mycontact = {
+            name:"Xxxxx",
+            phone:"xxxxxxxxxxx",
+            gender:"Male",
+            city:"xxxxxx",
+        };
+        var nameE1=document.getElementById("name");
+        nameE1.textContent=mycontact.name;
+
+        var phoneE1=document.getElementById("phone");
+        phoneE1.textContent=mycontact.phone;
+
+        
+
+
+    </script>
+
+
+</body>
+</html>

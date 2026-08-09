@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Carousel and Scrollspy</title>
+    
+<meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <style>
+        .safari-slide {
+            height: 150px;
+            background-size: cover;
+            background-position: center;
+        }
+        #forest {
+            background-color: rgb(144, 238, 144);
+            height: 150px;
+            box-shadow: 25px 40px 8px rgba(0, 0, 0, 0.2);
+        }
+        #mountain {
+            background-color: lightblue;
+            height: 150px;
+            box-shadow: 25px 40px 8px rgba(0, 0, 0, 0.2);
+        }
+        #ocean {
+            background-color: lightcoral;
+            height: 150px;
+            box-shadow: 25px 40px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .slide-forest {
+            background: rgb(0, 177, 0);
+        }
+        .slide-mountain {
+            background: rgb(0, 133, 178);
+        }
+        .slide-ocean {
+            background: rgb(192, 0, 0);
+        }
+        .section {
+            padding: 70px 50px;
+            #forest {
+                background-color: rgb(144, 238, 144);
+            }
+            #mountain {
+                background-color: lightblue;
+            }
+            #ocean {
+                background-color: lightcoral;
+            }
+        }
+    </style>
+
+</head>
+<body data-spy="scroll" data-target="safariNav" data-offset="60">
+    <div id="safariCarousel" class="carousel slide" data-ride="carousel">
+        
+        <ol class="carousel-indicators">
+            <li data-target="#safarocarousel" data-slide-to="0" class="active">active</li>
+            <li data-target="#safarocarousel" data-slide-to="1" >1</li>
+            <li data-target="#safarocarousel" data-slide-to="2" >2</li>
+</ol>
+
+    <div class="carousel-inner">
+        
+        <div class="carousel-item active safari-slide slide-forest">Forest</div><br>
+        <div class="carousel-item safari-slide slide-mountain">Mountain</div><br>
+        <div class="carousel-item safari-slide slide-ocean">Ocean</div><br>
+
+    </div>
+    <a class="carousel-control-prev" href="#safariCarousel" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#safariCarousel" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </a>
+</div>
+
+
+
+<nav id="#safariNav" class="navbar navbar-expand-sm navbar-dark bg-dark">
+
+    <span class="navbar-brand">Safari guide</span>
+    <ul class="navbar-nav">
+        <li class="nav-item"><a href="#forest" class="nav-link">Forest</a></li>
+        <li class="nav-item"><a href="#mountain" class="nav-link">Mountain</a></li>
+        <li class="nav-item"><a href="#ocean" class="nav-link">Ocean</a></li>
+    </ul>
+
+
+</nav>
+
+    <div class="container">
+        <div id="forest">
+            <h2>Forest</h2>
+            <p>Explore all trees and animals</p>
+            <p>explore the forest</p>
+    </div>
+
+        <div id="mountain">
+            <h2>Mountain</h2>
+            <p>Explore all mountains and places</p>
+            <p>explore the mountain</p>
+        </div>
+        
+        <div id="ocean">
+            <h2>Ocean</h2>
+            <p>Explore all oceans</p>
+            <p>explore the ocean</p>
+        </div>
+
+        
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    </div>
+
+</body>
+</html>
