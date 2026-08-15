@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Array and call stack</title>
+    <meta name="description" content="">
+</head>
+<body>
+    <p>fruits</p>
+    <p id="demo"> </p>
+    <p id="join"> </p>
+    <p id="apple"> </p>
+    <p id="kiwi"> </p>
+    <p id="mango"> </p>
+    <p id="orange"> </p>
+
+    <script>
+        var fruits = ["Apple", "kiwi", "mango"];
+        document.getElementById("demo").innerHTML=fruits[0];
+        document.getElementById("join").innerHTML=fruits.join(" * ");
+        document.getElementById("apple").innerHTML=fruits[0];
+        document.getElementById("kiwi").innerHTML=fruits[1];
+        document.getElementById("mango").innerHTML=fruits[2];
+        document.getElementById("orange").innerHTML=fruits[1];
+        fruits.pop();
+
+        function add(a,b)
+        {
+            return a+b;
+        }
+        function average(a,b){
+            return add(a,b)/2;
+        }
+        function subtract(a,b){
+            return a-b;
+        }
+        function multiply(a,b){
+            return a*b;
+        }
+        function divide(a,b){
+            return a/b;
+        }
+        function percentage(a,b){
+            return (a/b)*100;
+        }
+        
+        let sumResult=add(10,20);
+        let subResult=subtract(40,20);
+        let result=average(25,50);
+        let mulResult=multiply(15,30);
+        let divResult=divide(60,30);
+        let percResult=percentage(85,55);
+        document.write("Sum of 10 and 20 is: "+sumResult+"<br>");
+        document.write("Subtraction of 40 and 20 is: "+subResult+"<br>");
+        document.write("Average of 25 and 50 is: "+result+"<br>");
+        document.write("Multiplication of 15 and 30 is: "+mulResult+"<br>");
+        document.write("Division of 60 and 30 is: "+divResult+"<br>");
+        document.write("Percentage of 85 and 55 is: "+percResult+"<br>");
+
+    </script>
+
+
+
+</body>
+</html>
