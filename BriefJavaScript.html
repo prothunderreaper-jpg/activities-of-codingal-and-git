@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brief on JavaScript</title>
+
+</head>
+<body>
+    <h1> profile card</h1>
+    <p>name: <span id="name"></span></span></p>
+    <p>rank: <span id="rank"></span></p>
+    <p>greeting: <span id="greeting"></span></p>
+    <p>star: <span id="star"></span></p>
+    <p>isTopScore: <span id="isTopScore"></span></p>
+    <p>score: <span id="score"></span></p>
+    <p>totalmarks: <span id="totalmarks"></span></p>
+    <script>
+        let name="Ali";
+        let score=70;
+        let totalmarks=100;
+        let stars;
+        let rank;
+        let isTopScore= score==totalmarks;
+        let team;
+        let bonus=0;
+        if (score>=95){
+            rank="A+";
+        }
+        else if(score>=90){
+            rank="A";
+        }else if(score>=80){
+            rank="B";
+        }else if(score>=70){
+            rank="C";
+        }else if(score>=60){
+            rank="D";
+        }else{
+            rank="F";
+        }
+
+            let hour=new Date().getHours();
+            let greeting;
+            if(hour<12){
+                greeting="Good Morning";
+            }else if(hour<18){
+                greeting="Good Afternoon";
+            }else{
+                greeting="Good Evening";
+            }
+            let star="";
+            let count=0;
+            while(count<5){
+                star= star + "⭐";
+                count=count+1;
+            }
+    document.getElementById("name").innerHTML=name; 
+    document.getElementById("rank").innerHTML=rank;
+    document.getElementById("greeting").innerHTML=greeting;
+    document.getElementById("star").innerHTML=star;
+    document.getElementById("isTopScore").innerHTML=isTopScore;
+    document.getElementById("score").innerHTML=score;
+    document.getElementById("totalmarks").innerHTML=totalmarks;
+    document.getElementById("count").innerHTML=count;
+    document.getElementById("bonus").innerHTML=bonus;
+    </script>
+
+</body>
+</html>
