@@ -18,7 +18,6 @@
     var languages = ["150", "100", "55", "80", "200", "320", "475", "560" , "20" , "15" , "255" , "610"];
     languages.sort();
     document.getElementById("sorting").innerHTML= languages.sort();
-    languages.reverse();
     document.getElementById("reversing").innerHTML= languages.reverse();
 
     document.getElementById("mapping").innerHTML= mappingofarray;
@@ -26,13 +25,13 @@
         return language + " => ";
     });
     document.getElementById("sorting").innerHTML= languages.sort();
-    var aes= languages.sort( function(a,b) {
-            return a-b;
-        });
+    var aes = languages.slice().sort(function(a, b) {
+        return a - b;
+    });
     document.getElementById("reversing").innerHTML= languages.reverse();
-    var des= languages.reverse( function(b,a) {
-            return b-a;
-        }); 
+    var des = languages.slice().sort(function(a, b) {
+        return b - a;
+    });
     document.getElementById("sorting").innerHTML= aes;
     document.getElementById("reversing").innerHTML= des;
     document.getElementById("mapping").innerHTML= mappingofarray;
