@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array sorting and mapping in JavaScript</title>
+    
+</head>
+<body>
+    
+<h1>Array sorting and mapping in JavaScript</h1>
+<ul>
+    <li>sorting <span id="sorting"></span></li>
+    <li>reversing <span id="reversing"></span></li>
+    <li>mapping <span id="mapping"></span></li>
+</ul>
+<script>
+    var languages = ["150", "100", "55", "80", "200", "320", "475", "560" , "20" , "15" , "255" , "610"];
+    languages.sort();
+    document.getElementById("sorting").innerHTML= languages.sort();
+    languages.reverse();
+    document.getElementById("reversing").innerHTML= languages.reverse();
+
+    document.getElementById("mapping").innerHTML= mappingofarray;
+    var mappingofarray = languages.map(function(language) {
+        return language + " => ";
+    });
+    document.getElementById("sorting").innerHTML= languages.sort();
+    var aes= languages.sort( function(a,b) {
+            return a-b;
+        });
+    document.getElementById("reversing").innerHTML= languages.reverse();
+    var des= languages.reverse( function(b,a) {
+            return b-a;
+        }); 
+    document.getElementById("sorting").innerHTML= aes;
+    document.getElementById("reversing").innerHTML= des;
+    document.getElementById("mapping").innerHTML= mappingofarray;
+
+    
+</script>
+</body>
+</html>
