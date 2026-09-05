@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Details</title>
+   <style>
+        .card {
+            background-color: #656565;
+            h1 , h3 {
+                color: #1101f0;
+            }
+            .box{color: #047bf2;
+            background-color: #616161;
+            }
+        }
+    </style>
+</head>
+<body>
+     <div class="container py-4">
+        <div class="card mb-1"></div>
+        <h1>
+            JavaScript Details
+        </h1>
+        <p class="text-muted mb-4">
+            This is a simple page to display details about JavaScript.
+        </p>
+        <div class="mb-4"><div class="card-body">
+            <h3 class="card-title">JavaScript is a programming language</h3>
+            <button class="btn btn-warning" onclick="CheckTypes()">Reveal Types</button>
+            <div id="typeresult" class="box mt-3 p-3 rounded">press button to reveal types</div>  </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="card-title">JavaScript is a client-side language</h3>
+                    <input id="NumIn" type="number" placeholder="Enter a number" class="form-control mb-2" placeholder="Enter a number (try=50)">
+                    <button class="btn btn-warning mr2 " onclick="ToStr()">turn into text</button>
+                    <button class="btn btn-warning" onclick="ToNum()">turn into number</button>
+
+                    <div id="ConvoResult" class="box p-3 mt-3 rounded">type a number and click a button</div>
+
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="card-title">Find and swap a word</h3>
+                    <input id="findW" type="text" placeholder="Enter a word to find (try=JavaScript)" class="form-control mb-2" >
+                    <input id="swapW" type="text" placeholder="Enter a word to swap with" class="form-control mb-2" >
+                    <button class="btn btn-warning mr-2" onclick="DoSearch()">Find it</button>
+                    <button class="btn btn-warning" onclick="DoSwap()">Swap it</button>
+                    <div id="SrResult" class="box p-3 mt-3 rounded">Enter words and click the button</div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="card-title">JavaScript is a client-side language</h3>
+                    <input id="DivIn" type="number" placeholder="Enter a number" class="form-control mb-2" placeholder="Divide a number 100 by this - try a number or type something">
+                    <button class="btn btn-warning mr2 " onclick="ToStr()">turn into text</button>
+                    <button class="btn btn-warning" onclick="ToNum()">turn into number</button>
+                    <button class="btn btn-warning" onclick="TrySafe()">Divide 100 by this</button>
+                    <div id="errResult" class="box p-3 mt-3 rounded">type a number and see the result</div>
+
+                </div>
+            </div>
+                </div>
+
+
+        </div>
+    </div>
+            <div>
+                <script>
+                    var sen="the dragon flew over the mountain";
+                    function CheckTypes() {
+                        document.getElementById("typeresult").innerHTML = 
+                        "score 42           - type :" + typeof(42) + "\n" +
+                        "Name 'John'        - type :" + typeof("John") + "\n" +
+                        "Game over True     - type :" + typeof true ;
+                        
+                    }
+                    function ToStr() {
+                        var num = document.getElementById("NumIn").value;
+                        document.getElementById("ConvoResult").innerHTML = "String(+ V +)= '" +String(num) + "' and the type is: " + typeof String(num);
+                    }
+                    function ToNum() {
+                        var num = document.getElementById("NumIn").value;
+                        document.getElementById("ConvoResult").innerHTML = "Number(+ V +)= '" +Number(num) + "' and the type is: " + typeof Number(num) ;
+                    }
+                    function DoSearch() {
+                        var find = document.getElementById("findW").value;
+                        var pos = sen.indexOf(find);
+                        if (pos >= 0) {
+                            document.getElementById("SrResult").innerHTML = "Found '" + find + "' at position: " + pos;
+                        } else {
+                            document.getElementById("SrResult").innerHTML = "Word not found";
+                        }
+                    }
+                    function DoReplace() {
+                        var find = document.getElementById("findW").value;
+                        var swap = document.getElementById("swapW").value;
+                        var newSen = sen.replace(find, swap);
+                        document.getElementById("SrResult").innerHTML = "New sentence: " + newSen.replace(w, document.getElementById(swapW).value);
+                    }
+                    function TrySafe() {
+                        var num = document.getElementById("DivIn").value;
+                        try {
+                            if (isNaN(num)) throw "not a number";
+                            if (num === "" || isNaN(n)) throw "that is not a number";
+                           
+                            document.getElementById("errResult").innerHTML = "100 divided by " + n + " = " + (100 / number(n)) + "-good job" ;
+                        } catch (err) {
+                            document.getElementById("errResult").innerHTML = "Error caught: " + err;
+                        }
+                    }
+                </script>
+        
+
+</body>
+</html>
