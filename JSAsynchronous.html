@@ -6,24 +6,52 @@
     <title>Json and JS Asynchronous</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <style>
+    *
     h1{
-        background-color: #b8b8b8;
+        background-color: linear-gradient(135deg, #7b00ff 50%, #0011ff 100%);
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif, sans-serif;
+        background-color: #2d00f8;
         font-style: "trebuchet ms" , sans-serif;
+        color: white;
+        text-align: center;
+    }
+    div{
+        padding: 10px;
+        border: 1px solid #c9c9c9;
+        font-family: 'Trebuchet MS', 'Lucida Sans', Arial, sans-serif;
     }
     button{
+        
         margin: 10px;
         text-align: center;
         position: center;
         border: 15px;
         padding: 3px;
     }
+    
+    .gradient-btn {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    border: none;
+    color: white;
+    padding: 12px 28px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: opacity 0.3s ease, transform 0.2s ease;
+    }
+
+    .gradient-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    }
 
 </style>
 </head>
 <body>
     <h1>Delivery tracker</h1>
-    <button onclick="SaveOrder()">Save Order</button>
-    <button onclick="StartDelivery()">Start Delivery</button>
+    <button class="gradient-btn" onclick="SaveOrder()">Save Order</button>
+    <button class="gradient-btn" onclick="StartDelivery()">Start Delivery</button>
     <div>JSON text: <span id="jsonText"></span></div>
     <div>Loaded Item: <span id="loaded-Item"></span></div>
     <div>Loaded Price: <span id="loaded-Price"></span></div>
@@ -33,15 +61,16 @@
 
     <script>
      let order = {
-        item:  "Pizza",
-        price: 5,
+        item:  "Pizza and Coke",
+        price: 10,
         shop:  "My Snack Shop"
     };
 
     function SaveOrder() {
     let jsonText = JSON.stringify(order);
-    let loadedOrder = JSON.parse(jsonText);
-    document.getElementById("jsonText").innerHTML = jsonText;
+    let loadedOrder = JSON.parse(jsonText); 
+    document.getElementById("jsonText").innerHTML = loadedOrder.item + " from " + loadedOrder.shop;
+
     document.getElementById("loaded-Item").innerHTML = loadedOrder.item;
     document.getElementById("loaded-Price").innerHTML = "$" + loadedOrder.price;
     }
@@ -52,7 +81,7 @@
         });
     }
     async function StartDelivery() {
-        document.getElementById("result").innerHTML = "Result: Order is being processed";
+        document.getElementById("result").innerHTML = " Order is being processed";
       
         document.getElementById("status").innerHTML = "Delivered";
         document.getElementById("status").innerHTML = "Order received";
