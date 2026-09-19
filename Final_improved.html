@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/996973c893.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@400;500;600;700;800&family=Roboto+Slab:wght@200;400;600;900&display=swap" rel="stylesheet">
+    <title>Web Portfolio</title>
+    <style>
+        body {
+            background-color: #000000;
+            color: #fcfcfc;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #111111;
+            border-bottom: 2px solid #1000f3;
+            padding: 12px 25px;
+        }
+
+        .brand {
+            color: #ffffff;
+            font-size: 25px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .brand:hover {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .brand-icon {
+            color: #ffc107;
+            margin-left: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 8px 16px;
+            border: 1px solid #1000f3;
+            border-radius: 6px;
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            background-color: #1000f3;
+            color: #ffffff;
+        }
+
+        @media (max-width: 600px) {
+            .navbar {
+                padding: 12px 15px;
+            }
+
+            .nav-links a {
+                padding: 7px 9px;
+            }
+
+            .brand {
+                font-size: 21px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <meta name="description" content="This is my portfolio website">
+
+    <nav class="navbar d-flex justify-content-between align-items-center">
+        <a href="#" class="brand">
+            <u>Codingal</u><span class="fas fa-code brand-icon"></span>
+        </a>
+
+        <div class="nav-links">
+            <a href="https://www.google.com">About</a>
+            <a href="https://www.github.com">Projects</a>
+            <a href="https://www.youtube.com">Social Media</a>
+        </div>
+    </nav>
+</body>
+</html>
