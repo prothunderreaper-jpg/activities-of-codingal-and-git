@@ -36,36 +36,56 @@
 <body>
     <h1><u>My Calculator app</u></h1>
 
-    <input type="text" id="display" value="0" readonly>
+    <input type="text" id="display" disabled>
     <br>
-    <button class="Clear" onclick="clearDisplay">C</button>
-    <button class="Backspace" onclick="backspace">🔙</button>
-    <button class="function">=</button>
-    <button class="function">/</button>
+    <button class="Clear" onclick="clearDisplay()">C</button>
+    <button class="Backspace" onclick="deleteLast()">🔙</button>
+    <button class="function" onclick="calculate()">=</button>
+    <button class="function" onclick="appendValue('/')">/</button>
     <br>
-    <button class="numbers">7</button>
-    <button class="numbers">8</button>
-    <button class="numbers">9</button>
-    <button class="function">+</button>
+    <button class="numbers" onclick="appendValue('7')">7</button>
+    <button class="numbers" onclick="appendValue('8')">8</button>
+    <button class="numbers" onclick="appendValue('9')">9</button>
+    <button class="function" onclick="appendValue('+')">+</button>
    
     <br>
     
-    <button class="numbers">4</button>
-    <button class="numbers">5</button>
-    <button class="numbers">6</button>   
-    <button class="function">-</button>
+    <button class="numbers" onclick="appendValue('4')">4</button>
+    <button class="numbers" onclick="appendValue('5')">5</button>
+    <button class="numbers" onclick="appendValue('6')">6</button>   
+    <button class="function" onclick="appendValue('-')">-</button>
    
     <br>
-    <button class="numbers">1</button>
-    <button class="numbers">2</button>
-    <button class="numbers">3</button>
-    <button class="function">x</button>
+    <button class="numbers" onclick="appendValue('1')">1</button>
+    <button class="numbers" onclick="appendValue('2')">2</button>
+    <button class="numbers" onclick="appendValue('3')">3</button>
+    <button class="function" onclick="appendValue('*')">x</button>
     
     <br>
-    
-   
-    
-    
+    <script>
+        const display = document.getElementById("display")
+        function appendValue(value)
+        {
+            display.value += value;
+        }
+        function clearDisplay(){
+            display.value = "";
+        }
+        function deleteLast(){
+            display.value = display.value.slice(0, -1);
+        }
+        function calculate(){
+            try {
+                if (display.value === "") return;
+                display.value = eval(display.value)
+            }
+            catch(error){
+                display.value = "error";
+
+            }
+        }
+
+    </script>
     
 </input>
 </body>
