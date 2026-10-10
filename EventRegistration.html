@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration Form | Validation in JS</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Trebuchet MS", Arial, sans-serif;
+            background: linear-gradient(135deg, #eef4ff, #f8fbff);
+            color: #17233c;
+        }
+
+        .page {
+            width: min(1050px, 92%);
+            margin: 40px auto;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #173b73, #285ea8);
+            color: white;
+            border-radius: 22px;
+            padding: 34px 38px;
+            box-shadow: 0 14px 35px rgba(31, 68, 120, 0.18);
+            margin-bottom: 25px;
+        }
+
+        .hero h1 {
+            margin: 0 0 8px;
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: clamp(30px, 5vw, 48px);
+        }
+
+        .hero p {
+            margin: 0;
+            font-size: 17px;
+            line-height: 1.6;
+            opacity: 0.92;
+        }
+
+        .card {
+            background: white;
+            border-radius: 22px;
+            padding: 32px;
+            box-shadow: 0 10px 30px rgba(25, 45, 80, 0.10);
+        }
+
+        .section-title {
+            color: #173b73;
+            margin: 0 0 22px;
+            font-size: 25px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #243b61;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 13px 14px;
+            font-size: 16px;
+            border-radius: 9px;
+            border: 2px solid #ccd7e8;
+            font-family: "Trebuchet MS", sans-serif;
+            outline: none;
+            background: #fff;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #2c67b1;
+            box-shadow: 0 0 0 3px rgba(44, 103, 177, 0.12);
+        }
+
+        input:invalid:not(:placeholder-shown),
+        select:invalid {
+            border-color: #e04b4b;
+        }
+
+        .hint {
+            margin: 6px 0 0;
+            font-size: 13px;
+            color: #71809a;
+        }
+
+        .message {
+            min-height: 21px;
+            margin: 6px 0 0;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .actions {
+            margin-top: 25px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            border: 0;
+            border-radius: 10px;
+            padding: 13px 23px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: "Trebuchet MS", sans-serif;
+            transition: transform 0.15s, opacity 0.15s;
+        }
+
+        button:hover {
+            transform: translateY(-1px);
+        }
+
+        #submitBtn {
+            background: #ff604f;
+            color: white;
+        }
+
+        #resetBtn {
+            background: #e9eef6;
+            color: #263b5d;
+        }
+
+        #result {
+            display: none;
+            margin-top: 25px;
+            padding: 22px;
+            border-radius: 14px;
+            background: #eefaf2;
+            border: 2px solid #55ad72;
+            color: #1d6c36;
+        }
+
+        #result h2 {
+            margin: 0 0 10px;
+        }
+
+        #passNumber {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        #loading {
+            display: none;
+            margin-top: 18px;
+            color: #285ea8;
+            font-weight: bold;
+        }
+
+        .requirements {
+            margin-top: 28px;
+            padding: 18px 20px;
+            border-radius: 14px;
+            background: #f5f8fc;
+        }
+
+        .requirements h3 {
+            margin-top: 0;
+            color: #173b73;
+        }
+
+        .requirements li {
+            margin: 8px 0;
+        }
+
+        footer {
+            text-align: center;
+            margin: 20px 0 35px;
+            color: #71809a;
+            font-size: 14px;
+        }
+
+        @media (max-width: 700px) {
+            .page {
+                width: 94%;
+                margin: 20px auto;
+            }
+
+            .hero,
+            .card {
+                padding: 24px 20px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full {
+                grid-column: auto;
+            }
+        }
+        p{
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="page">
+        <section class="hero">
+            <h1>Event Registration Form</h1>
+            <p>
+                Register for your selected student event. JavaScript validation
+                checks your details and creates a random event pass after a short delay.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2 class="section-title">Student Details</h2>
+
+            <form id="registrationForm" novalidate>
+                <div class="form-grid">
+
+                    <div class="field">
+                        <label for="name">Full Name *</label>
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="Enter your full name"
+                            required
+                            minlength="3"
+                        >
+                        <p class="hint">At least 3 characters</p>
+                        <p id="msg-name" class="message"></p>
+                    </div>
+
+                    <div class="field">
+                        <label for="email">Email Address *</label>
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="student@example.com"
+                            required
+                        >
+                        <p class="hint">Enter a valid email address</p>
+                        <p id="msg-email" class="message"></p>
+                    </div>
+
+                    <div class="field">
+                        <label for="age">Age *</label>
+                        <input
+                            type="number"
+                            id="age"
+                            placeholder="Enter your age"
+                            min="13"
+                            max="100"
+                            required
+                        >
+                        <p class="hint">Age must be between 13 and 100</p>
+                        <p id="msg-age" class="message"></p>
+                    </div>
+
+                    <div class="field">
+                        <label for="event">Select Event *</label>
+                        <select id="event" required>
+                            <option value="">-- Choose an event --</option>
+                            <option value="Web Development Workshop">Web Development Workshop</option>
+                            <option value="JavaScript Challenge">JavaScript Challenge</option>
+                            <option value="UI/UX Design Meetup">UI/UX Design Meetup</option>
+                            <option value="Coding Competition">Coding Competition</option>
+                        </select>
+                        <p class="hint">Choose one event</p>
+                        <p id="msg-event" class="message"></p>
+                    </div>
+
+                    <div class="field full">
+                        <label for="studentId">Student ID *</label>
+                        <input
+                            type="text"
+                            id="studentId"
+                            placeholder="e.g. STU-2026-001"
+                            required
+                            minlength="5"
+                        >
+                        <p class="hint">Student ID must contain at least 5 characters</p>
+                        <p id="msg-studentId" class="message"></p>
+                    </div>
+
+                </div>
+
+                <div class="actions">
+                    <button type="button" id="submitBtn" onclick="checkForm()">
+                        Register for Event
+                    </button>
+                    <button type="reset" id="resetBtn" onclick="resetForm()">
+                        Clear Form
+                    </button>
+                </div>
+
+                <p id="loading">✓ Details validated. Generating your event pass...</p>
+
+                <div id="result">
+                    <h2>Registration Successful!</h2>
+                    <p id="successMessage"></p>
+                    <p>Your random event pass number:</p>
+                    <p id="passNumber"></p>
+                </div>
+            </form>
+
+            <div class="requirements">
+                <h3>Validation Used in This Project</h3>
+                <ul>
+                    <li>HTML5 constraints: <strong>required, minlength, min, max, type="email"</strong></li>
+                    <li>JavaScript reads form values using the <strong>.value</strong> property.</li>
+                    <li><strong>checkValidity()</strong> checks the form constraints.</li>
+                    <li><strong>reportValidity()</strong> displays browser validation feedback.</li>
+                    <li>Custom errors are handled with <strong>try...catch...throw</strong>.</li>
+                    <li>DOM updates display success and error messages.</li>
+                    <li><strong>setTimeout()</strong> creates a short pass-generation delay.</li>
+                    <li><strong>Math.random()</strong> generates the random event pass number.</li>
+                </ul>
+            </div>
+        </section>
+
+        <footer>
+            Event Registration • Validation in JavaScript
+        </footer>
+    </main>
+
+    <script>
+        // Timer based on the original uploaded HTML example.
+        var seconds=0;
+        setInterval(function(){
+            seconds=seconds + 1;
+            document.getElementById("timer").innerHTML = "you have been here for " + seconds + " seconds";
+        }, 1000);
+
+        function setMessage(id, text, color) {
+            document.getElementById(id).textContent = text;
+            document.getElementById(id).style.color = color;
+        }
+
+        function checkForm() {
+            var form = document.getElementById("registrationForm");
+            var name = document.getElementById("name").value.trim();
+            var email = document.getElementById("email").value.trim();
+            var age = document.getElementById("age").value;
+            var eventName = document.getElementById("event").value;
+            var studentId = document.getElementById("studentId").value.trim();
+
+            var ok = true;
+
+            // Clear previous messages.
+            setMessage("msg-name", "", "");
+            setMessage("msg-email", "", "");
+            setMessage("msg-age", "", "");
+            setMessage("msg-event", "", "");
+            setMessage("msg-studentId", "", "");
+            document.getElementById("result").style.display = "none";
+
+            // Constraint Validation API.
+            if (!form.checkValidity()) {
+                form.reportValidity();
+            }
+
+            try {
+                if (name === "") {
+                    throw new Error("Name is required.");
+                }
+
+                if (name.length < 3) {
+                    throw new Error("Name must contain at least 3 characters.");
+                }
+
+                if (email === "") {
+                    throw new Error("Email is required.");
+                }
+
+                if (!document.getElementById("email").validity.valid) {
+                    throw new Error("Please enter a valid email address.");
+                }
+
+                if (age === "") {
+                    throw new Error("Age is required.");
+                }
+
+                if (Number(age) < 13 || Number(age) > 100) {
+                    throw new Error("Age must be between 13 and 100.");
+                }
+
+                if (eventName === "") {
+                    throw new Error("Please select an event.");
+                }
+
+                if (studentId === "") {
+                    throw new Error("Student ID is required.");
+                }
+
+                if (studentId.length < 5) {
+                    throw new Error("Student ID must contain at least 5 characters.");
+                }
+
+                // Field feedback using DOM updates.
+                setMessage("msg-name", "✓ Name looks good!", "green");
+                setMessage("msg-email", "✓ Valid email!", "green");
+                setMessage("msg-age", "✓ Age accepted!", "green");
+                setMessage("msg-event", "✓ Event selected!", "green");
+                setMessage("msg-studentId", "✓ Student ID accepted!", "green");
+
+                ok = true;
+
+            } catch (error) {
+                ok = false;
+
+                // Display the custom validation error on the page.
+                if (error.message.includes("Name")) {
+                    setMessage("msg-name", error.message, "red");
+                } else if (error.message.includes("Email") || error.message.includes("email")) {
+                    setMessage("msg-email", error.message, "red");
+                } else if (error.message.includes("Age")) {
+                    setMessage("msg-age", error.message, "red");
+                } else if (error.message.includes("event")) {
+                    setMessage("msg-event", error.message, "red");
+                } else if (error.message.includes("Student ID")) {
+                    setMessage("msg-studentId", error.message, "red");
+                }
+            }
+
+            if (ok === true && form.checkValidity()) {
+                var loading = document.getElementById("loading");
+                loading.style.display = "block";
+
+                // Short delay before generating the random pass.
+                setTimeout(function () {
+                    var pass = Math.floor(100000 + Math.random() * 900000);
+
+                    document.getElementById("successMessage").textContent =
+                        "Welcome, " + name + "! You are registered for " + eventName + ".";
+
+                    document.getElementById("passNumber").textContent =
+                        "EVT-" + pass;
+
+                    document.getElementById("result").style.display = "block";
+                    loading.style.display = "none";
+                }, 1200);
+            }
+        }
+
+        function resetForm() {
+            setMessage("msg-name", "", "");
+            setMessage("msg-email", "", "");
+            setMessage("msg-age", "", "");
+            setMessage("msg-event", "", "");
+            setMessage("msg-studentId", "", "");
+
+            document.getElementById("loading").style.display = "none";
+            document.getElementById("result").style.display = "none";
+        }
+    </script>
+</body>
+</html>

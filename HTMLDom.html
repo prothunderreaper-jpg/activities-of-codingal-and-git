@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Zoo</title>
+</head>
+<body>
+       <h1>The Zoo</h1> 
+       <p>Data for the zoo  </p>
+       <div id="zoo">
+        <div class="zone">zone 1:<span id="zone1"></span></div>
+        <div class="zone">zone 2:<span id="zone2"></span></div>
+        <div class="zone">zone 3:<span id="zone3"></span></div>
+        <div class="zone">zone 4:<span id="zone4"></span></div>
+        <div class="zone">zone 5:<span id="zone5"></span></div>
+        <div class="total">total: <span id="total"></span></div>
+       </div>
+       <button onclick="openZoo()">open zoo</button>
+       <button onclick="closeZoo()">close zoo</button>
+       <p id="zoo-status"></p>
+       <script>
+        function openZoo(){
+            document.getElementById("zone1").innerHTML="Lion";
+            document.getElementById("zone2").innerHTML="Tiger";
+            document.getElementById("zone3").innerHTML="Bear";
+            document.getElementById("zone4").innerHTML="Elephant";
+            document.getElementById("zone5").innerHTML="Giraffe";
+            document.getElementById("total").innerHTML="5";
+            document.getElementById("zoo-status").style.backgroundColor="lightblue";
+            document.getElementById("zoo-status").innerHTML= document.title+" is open";
+        }
+
+        function closeZoo(){
+            document.getElementById("zone1").innerHTML="Lion";
+            document.getElementById("zone2").innerHTML="Tiger";
+            document.getElementById("zone3").innerHTML="Bear";
+            document.getElementById("zone4").innerHTML="Elephant";
+            document.getElementById("zone5").innerHTML="Giraffe";
+            document.getElementById("total").innerHTML="5";
+            document.getElementById("zoo-status").style.backgroundColor="lightcoral";
+            document.getElementById("zoo-status").innerHTML= document.title+" is closed";
+        }
+        </script>
+</body>
+</html>

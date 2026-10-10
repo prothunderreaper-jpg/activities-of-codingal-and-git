@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000000;
+            font-family: Arial, sans-serif;
+        }
+
+        #calculator {
+            width: 340px;
+            padding: 22px;
+            background: #1e293b;
+            border-radius: 18px;
+            box-shadow: 0 12px 30px #0003;
+        }
+
+        #display {
+            width: 100%;
+            height: 85px;
+            margin-bottom: 18px;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: #f8fafc;
+            color: #172033;
+            text-align: right;
+            font-size: 32px;
+            outline: none;
+        }
+
+        #keys {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .key {
+            height: 58px;
+            border: none;
+            border-radius: 10px;
+            background: #334155;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: ease-in 0.15s;
+        }
+
+        .key:hover {
+            background: #475569;
+        }
+
+        .operator {
+            background: #2563eb;
+        }
+
+        .operator:hover {
+            background: #1d4ed8;
+        }
+
+        .clear {
+            background: #dc3545;
+        }
+
+        .clear:hover {
+            background: #b91c1c;
+        }
+
+        .equals {
+            background: #16a34a;
+        }
+
+        .equals:hover {
+            background: #15803d;
+        }
+
+        .zero {
+            grid-column: span 2;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="calculator">
+        <input type="text" id="display" value="0" readonly>
+
+        <div id="keys">
+            <button class="key clear" data-action="clear">AC</button>
+            <button class="key" data-action="delete">DEL</button>
+            <button class="key operator" data-action="percent">%</button>
+            <button class="key operator" data-value="/">÷</button>
+
+            <button class="key" data-value="7">7</button>
+            <button class="key" data-value="8">8</button>
+            <button class="key" data-value="9">9</button>
+            <button class="key operator" data-value="*">×</button>
+
+            <button class="key" data-value="4">4</button>
+            <button class="key" data-value="5">5</button>
+            <button class="key" data-value="6">6</button>
+            <button class="key operator" data-value="-">−</button>
+
+            <button class="key" data-value="1">1</button>
+            <button class="key" data-value="2">2</button>
+            <button class="key" data-value="3">3</button>
+            <button class="key operator" data-value="+">+</button>
+
+            <button class="key" data-action="sign">+/−</button>
+            <button class="key zero" data-value="0">0</button>
+            <button class="key" data-action="decimal">.</button>
+
+            <button class="key equals" data-action="equals"
+                style="grid-column: span 4;">=</button>
+        </div>
+    </div>
+
+    <script>
+        const display = document.getElementById("display");
+        const keys = document.getElementById("keys");
+
+        let current = "0";
+        let previous = null;
+        let operator = null;
+        let resetNext = false;
+
+        function updateDisplay() {
+            display.value = current;
+        }
+
+        function formatNumber(number) {
+            if (!Number.isFinite(number)) {
+                current = "Error";
+                previous = null;
+                operator = null;
+                resetNext = true;
+                return;
+            }
+
+            current = String(Number(number.toPrecision(12)));
+        }
+
+        function calculate() {
+            if (operator === null || previous === null) return;
+
+            const a = Number(previous);
+            const b = Number(current);
+            let result;
+
+            switch (operator) {
+                case "+":
+                    result = a + b;
+                    break;
+                case "-":
+                    result = a - b;
+                    break;
+                case "*":
+                    result = a * b;
+                    break;
+                case "/":
+                    result = b === 0 ? NaN : a / b;
+                    break;
+            }
+
+            formatNumber(result);
+            previous = null;
+            operator = null;
+            resetNext = true;
+            updateDisplay();
+        }
+
+        function inputNumber(value) {
+            if (current === "Error" || resetNext) {
+                current = value;
+                resetNext = false;
+            } else if (current === "0") {
+                current = value;
+            } else if (current.length < 15) {
+                current += value;
+            }
+
+            updateDisplay();
+        }
+
+        function chooseOperator(value) {
+            if (current === "Error") return;
+
+            if (operator !== null && !resetNext) {
+                calculate();
+            }
+
+            previous = current;
+            operator = value;
+            resetNext = true;
+        }
+
+        function handleAction(action) {
+            if (action === "clear") {
+                current = "0";
+                previous = null;
+                operator = null;
+                resetNext = false;
+            } else if (action === "delete") {
+                if (current === "Error" || resetNext) {
+                    current = "0";
+                    resetNext = false;
+                } else {
+                    current = current.length > 1
+                        ? current.slice(0, -1)
+                        : "0";
+
+                    if (current === "-") current = "0";
+                }
+            } else if (action === "decimal") {
+                if (current === "Error" || resetNext) {
+                    current = "0.";
+                    resetNext = false;
+                } else if (!current.includes(".")) {
+                    current += ".";
+                }
+            } else if (action === "sign") {
+                if (current !== "0" && current !== "Error") {
+                    current = String(-Number(current));
+                }
+            } else if (action === "percent") {
+                if (current !== "Error") {
+                    formatNumber(Number(current) / 100);
+                    resetNext = true;
+                }
+            } else if (action === "equals") {
+                calculate();
+            }
+
+            updateDisplay();
+        }
+
+        keys.addEventListener("click", function(event) {
+            const button = event.target.closest("button");
+            if (!button) return;
+
+            if (button.dataset.value !== undefined) {
+                const value = button.dataset.value;
+
+                if ("0123456789".includes(value) && value.length === 1) {
+                    inputNumber(value);
+                } else {
+                    chooseOperator(value);
+                }
+            } else {
+                handleAction(button.dataset.action);
+            }
+        });
+
+        document.addEventListener("keydown", function(event) {
+            const key = event.key;
+
+            if (key >= "0" && key <= "9") {
+                inputNumber(key);
+            } else if (key === ".") {
+                handleAction("decimal");
+            } else if (["+", "-", "*", "/"].includes(key)) {
+                chooseOperator(key);
+            } else if (key === "Enter" || key === "=") {
+                event.preventDefault();
+                calculate();
+            } else if (key === "Backspace") {
+                handleAction("delete");
+            } else if (key === "Escape") {
+                handleAction("clear");
+            } else if (key === "%") {
+                handleAction("percent");
+            }
+        });
+    </script>
+
+</body>
+</html>

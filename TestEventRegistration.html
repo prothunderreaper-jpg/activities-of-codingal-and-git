@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration Form</title>
+    <style>
+    
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: rgb(2, 2, 2);
+            color: rgb(255, 255, 255);
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: rgb(53, 53, 53);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 5px 10px 12px -1px rgb(0, 243, 211);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: rgb(255, 255, 255);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid rgb(108, 117, 129);
+            border-radius: 6px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: rgb(70, 229, 218);
+            box-shadow: 0 0 0 3px rgb(0, 204, 255)
+        }
+
+        .error-message {
+            color: rgb(220, 38, 38);
+            font-size: 0.85rem;
+            margin-top: 0.35rem;
+            min-height: 1.25rem;
+        }
+
+        button {
+            width: 100%;
+            padding: 0.85rem;
+            background-color: rgb(70, 229, 218);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 0.5rem;
+        }
+
+        button:hover {
+            background-color: rgb(56, 189, 182);
+        }
+
+        #feedback-area {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 6px;
+            display: none;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .success-box {
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: rgb(22, 101, 55);
+        }
+
+        .error-box {
+            background-color: #fef2f2;
+            border: 1px solid #fecaca;
+            color: rgb(220, 38, 38);
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(79, 70, 229, 0.3);
+            border-radius: 50%;
+            border-top-color: rgb(70, 229, 218);
+            animation: spin 1s ease-in-out infinite;
+            margin-bottom: 0.5rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        p{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Event Registration</h2>
+        <p id="timer"></p>
+        <form id="registrationForm" novalidate>
+           
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input 
+                    type="text" 
+                    id="fullName" 
+                    required 
+                    minlength="3" 
+                    placeholder="Name"
+                >
+                <div class="error-message" id="nameError"></div>
+            </div>
+
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    required 
+                    placeholder="example@email.com"
+                >
+                <div class="error-message" id="emailError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input 
+                    type="number" 
+                    id="age" 
+                    required 
+                    min="12" 
+                    max="100" 
+                    placeholder="Must be 12 or older"
+                >
+                <div class="error-message" id="ageError"></div>
+            </div>
+
+            
+            <div class="form-group">
+                <label for="eventSelect">Select Event</label>
+                <select id="eventSelect" required>
+                    <option value="" disabled selected>--Choose an Event--</option>
+                    <option value="Museum">Sci-Fi Museum 2026</option>
+                    <option value="Biscuit">Biscuit Factory Tour</option>
+                    <option value="ai-conference">AI & ML Conference</option>
+                    <option value="Zoo">Zoo Visit</option>
+                </select>
+                <div class="error-message" id="eventError"></div>
+            </div>
+
+            <button type="submit">Register Now</button>
+        </form>
+
+        
+        <div id="feedback-area"></div>
+    </div>
+
+    <script>
+        var seconds=0;
+        setInterval(function(){
+            seconds=seconds + 1;
+            document.getElementById("timer").innerHTML = "you have been here for " + seconds + " seconds";
+        }, 1000);
+
+
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            
+            event.preventDefault();
+
+           
+            const nameInput = document.getElementById('fullName');
+            const emailInput = document.getElementById('email');
+            const ageInput = document.getElementById('age');
+            const eventInput = document.getElementById('eventSelect');
+            const feedbackArea = document.getElementById('feedback-area');
+
+          
+            clearErrors();
+            feedbackArea.style.display = 'none';
+            feedbackArea.className = '';
+
+            try {
+                let isValid = true;
+
+               
+                if (!nameInput.checkValidity()) {
+                    displayFieldError('nameError', nameInput.validationMessage);
+                    isValid = false;
+                }
+                
+                if (!emailInput.checkValidity()) {
+                    displayFieldError('emailError', emailInput.validationMessage);
+                    isValid = false;
+                }
+
+                if (!ageInput.checkValidity()) {
+                    displayFieldError('ageError', ageInput.validationMessage);
+                    isValid = false;
+                }
+
+                if (!eventInput.checkValidity()) {
+                    displayFieldError('eventError', "Please select an event from the list.");
+                    isValid = false;
+                }
+
+               
+                if (!isValid) {
+                    this.reportValidity();
+                    throw new Error("Form validation failed. Please fix the highlighted errors.");
+                }
+
+               
+                const registrationData = {
+                    name: nameInput.value.trim(),
+                    email: emailInput.value.trim(),
+                    age: parseInt(ageInput.value, 10),
+                    event: eventInput.options[eventInput.selectedIndex].text
+                };
+
+               
+                if (registrationData.name.toLowerCase() === "admin") {
+                    displayFieldError('nameError', "'Admin' is a reserved name.");
+                    throw new Error("Invalid registration name used.");
+                }
+
+               
+                feedbackArea.style.display = 'block';
+                feedbackArea.innerHTML = '<div class="loading"></div><br>Verifying registration and generating event pass...';
+                feedbackArea.className = 'success-box';
+
+                
+                setTimeout(() => {
+                    const passNumber = Math.floor(100000 + Math.random() * 900000);
+                    
+                    feedbackArea.innerHTML = `
+                        <strong>Registration Successful!</strong><br>
+                        Thank you, ${registrationData.name}.<br>
+                        Your pass for <em>${registrationData.event}</em> is generated:<br>
+                        <span style="font-size: 1.2rem; font-weight: bold; color: #4f46e5;">#EVT-${passNumber}</span>
+                    `;
+                }, 1500); 
+
+            } catch (customError) {
+               
+                feedbackArea.style.display = 'block';
+                feedbackArea.className = 'error-box';
+                feedbackArea.textContent = customError.message;
+            }
+        });
+
+        function displayFieldError(elementId, message) {
+            document.getElementById(elementId).textContent = message;
+        }
+
+        function clearErrors() {
+            const errorDivs = document.querySelectorAll('.error-message');
+            errorDivs.forEach(div => div.textContent = '');
+        }   
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classes in JavaScript</title>
+    <style>
+        h1{
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif, Helvetica, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Car Information</h1>
+    <p> ---------- <span id="Car"></span></p>
+    <script>
+        class car{
+            constructor(name, year){
+                this.name = name;
+                this.year = year;
+            }
+            models(){
+                return this.name + " was designed in this year " + this.year;
+            }
+        }
+        let c1 = new car("BMW", 2020);
+        document.write(c1.models());
+        let c2 = new car("Toyota", 2021);
+        document.write("<br>" + c2.models());
+        let c3 = new car("Lamborghini", 2022);
+        document.write("<br>" + c3.models());
+        document.getElementById("Car").innerHTML = "The Car "+c1.name+" was designed in year "+c1.year + "<br>" + "The Car "+c2.name+" was designed in year "+c2.year + "<br>" + "The Car "+c3.name+" was designed in year "+c3.year;
+
+    </script>
+
+</body>
+</html>
