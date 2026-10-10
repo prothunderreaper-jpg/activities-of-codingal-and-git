@@ -138,5 +138,46 @@
         <div id="note">|_Enter an amount and choose an action above_|</div>
 
     </div>
+
+    <script>
+        const balance = document.getElementById("balance");
+        const amount = document.getElementById("amount");
+        const note = document.getElementById("note");
+        const creditBtn = document.getElementById("credit-btn");
+        const debitBtn = document.getElementById("debit-btn");
+
+        function creditMoney() {
+            const money = Number(amount.value);
+            const currentBalance = Number(balance.innerText);
+
+            if (amount.value === "" || money <= 0 || !Number.isFinite(money)) {
+                note.innerText = "Please enter a valid amount.";
+            } else {
+                balance.innerText = currentBalance + money;
+                note.innerText = "Money added successfully!";
+                amount.value = "";
+            }
+        }
+
+        function debitMoney() {
+            const money = Number(amount.value);
+            const currentBalance = Number(balance.innerText);
+
+            if (amount.value === "" || money <= 0 || !Number.isFinite(money)) {
+                note.innerText = "Please enter a valid amount.";
+            } else if (money > currentBalance) {
+                note.innerText = "Insufficient balance!";
+            } else {
+                balance.innerText = currentBalance - money;
+                note.innerText = "Money withdrawn successfully!";
+                amount.value = "";
+            }
+        }
+
+        creditBtn.addEventListener("click", creditMoney);
+        debitBtn.addEventListener("click", debitMoney);
+
+</script>
+
 </body>
 </html>
